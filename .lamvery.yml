@@ -1,0 +1,14 @@
+profile: null
+region: ap-northeast-1
+versioning: false
+default_alias: null
+clean_build: false
+configuration:
+  name: getTwitterNazo
+  runtime: python2.7
+  role: arn:aws:iam::850890597300:role/lambda_basic_execution_dynamodb_access
+  handler: blog_entry-twtter_nazo-random.lambda_handler
+  description: "function of get a twitter URL from DynamoDB"
+  timeout: 300
+  memory_size: 128
+  environment_variables:
