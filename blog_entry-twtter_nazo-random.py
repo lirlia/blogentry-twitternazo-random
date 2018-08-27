@@ -14,9 +14,9 @@ from boto3.dynamodb.conditions import Key, Attr
 def getNazoFromDynamo(count):
 
     tableName = "nazo-tweet-tables"
-    tableName_seq = "nazo-tweet-tables-sequence"
+    tableName_seq = "sequences"
     key = "no"
-    key_seq = "count"
+    key_seq = "my_table"
 
     dynamodb = boto3.resource(
         'dynamodb',
@@ -30,7 +30,9 @@ def getNazoFromDynamo(count):
 
     # これまで集計したTwitter謎の総数を取得
     try:
-        maxNazoCount = table_seq.scan()['Items'][0]['count']
+        maxNazoCount = table_seq.query(
+             KeyConditionExpression=Key('name').eq(key_seq)
+        )['Items'][0]['current_number']
     except:
         return
 
