@@ -46,10 +46,9 @@ def getNazoFromDynamo(count):
     while True:
 
         #
-        # Twitter謎の番号を配列に格納し、そこからランダムで指定個数＋バッファ分を配列に格納する
-        #
-        # バッファ分を追加しているのはDynamoDBに格納した後にTwitter謎ではないと判断され
-        # 列ごと削除した場合があり、一部のnoは欠損しているため多めに見積もっておく
+        # Twitter謎の番号を配列に格納し、そこからランダムで指定個数を配列に格納する
+        #　DynamoDBに格納した後にTwitter謎ではないと判断され削除したものがあるため、
+        # 指定した数字の情報がない可能性があるのでwhileで無限ループを行う
         #
         nazoList = list(range(1,maxNazoCount,1))
         nazoListChoice = random.sample(nazoList, count)
@@ -105,8 +104,6 @@ def lambda_handler(event, context):
 
     #
     # DBからデータの取得を行う
-    # 失敗時： result = False を返却
-    # 成功時： result = True を返却
     #
     result = getNazoFromDynamo(count)
 
