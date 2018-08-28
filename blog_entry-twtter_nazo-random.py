@@ -89,7 +89,7 @@ def respond(httpStatusCode, data):
         'statusCode': httpStatusCode,
         'headers': {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': 'https://www.nazomap.com'
         },
         'body': '' if data is None else str(data)
     }
